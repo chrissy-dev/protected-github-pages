@@ -2,6 +2,7 @@
 
 Very simple password protection to static pages or whole websites with no server configuration required: you ca use Dropbox, Amazon S3 or any generic hosting service to host a private, password protected site.
 
+### [Check out the demo](https://chrisssycollins.github.io/protected-github-pages/)
 
 ## Setup
 
