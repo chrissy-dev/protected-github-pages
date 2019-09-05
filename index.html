@@ -98,14 +98,14 @@
             </div>
         </div>
 
-        <script type="text/javascript" src="https://cdn.rawgit.com/chrisveness/crypto/master/sha1.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/js-sha1/0.6.0/sha1.min.js"></script>
         <script type="text/javascript">
             "use strict"
             var button = document.querySelectorAll('[data-id="button"]')
             var password = document.querySelectorAll('[data-id="password"]')
 
             function login(secret) {
-                var hash = Sha1.hash(secret)
+                var hash = sha1(secret)
                 var url = hash + "/index.html"
                 var alert = document.querySelectorAll('[data-id="alert"]')
 
