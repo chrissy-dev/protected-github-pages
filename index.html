@@ -1,146 +1,254 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>Password Protected</title>
 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="robots" content="noindex, nofollow">
+<head>
+    <title>Password Protected</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        :root {
+            /* Colors */
+            --bg: hsl(220 13% 95%);
+            --card: hsl(0 0% 100%);
+            --border: hsl(214 32% 91%);
+            --text: hsl(222 84% 5%);
+            --muted: hsl(215 16% 47%);
+            --primary: hsl(222 84% 5%);
+            --primary-hover: hsl(222 84% 8%);
+            --error-bg: hsl(0 86% 97%);
+            --error-border: hsl(0 72% 91%);
+            --error-text: hsl(0 84% 40%);
 
-        <style>
-            *,
-            *:after,
-            *:before {
-                box-sizing: border-box;
-            }
-            body,
-            html {
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-                font-weight: 300;
-                font-size: 16px;
-                background: #f2f2f2;
-                color: #2D3737;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                min-height: 100%;
-            }
+            /* Radius */
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
 
-            .protected {
-                background: #fff;
-                -webkit-box-shadow: 0 2px 3px 0 rgba(0,0,0,0.1);
-                box-shadow: 0 2px 3px 0 rgba(0,0,0,0.1);
-                border-radius: 3px;
-                min-width: 500px;
+            /* Shadows */
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --ring: 0 0 0 3px hsl(222 84% 95%);
 
-            }
-            .protected__content {
-                padding: 24px 28px;
-            }
-            .protected__content__heading {
-                font-size: 16px;
-                font-weight: 500;
-                margin: 0 0 12px;
-                line-height: 1;
-            }
-            .protected__alert {
-                display: none;
-                border-bottom: 1px solid transparent;
-                border-radius: 3px 3px 0 0;
-                padding: 12px 14px;
-                color: #a94442;
-                background-color: #f2dede;
-                border-color: #ebccd1;
-            }
-            .protected__content__input {
-                display: block;
-                border: solid 1px #ccc;
-                padding: 12px 14px;
-                -webkit-box-shadow: 0 2px 3px 0 rgba(0,0,0,0.1);
-                box-shadow: 0 2px 3px 0 rgba(0,0,0,0.1);
-                font-size: 16px;
-                width: 100%;
-                border-radius: 3px;
+            /* Spacing */
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
 
-                margin-bottom: 12px;
-            }
-            .protected__content__input:focus {
-                outline: none;
-                border-color: #228843;
-            }
-            .protected__content__btn {
-                background-color: #228843;
-                border-radius: 3px;
-                cursor: pointer;
-                border: none;
-                color: #fff;
-                padding: 12px 14px;
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-                font-weight: 500;
-                font-size: 16px;
+            /* Typography */
+            --font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+                "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+                "Helvetica Neue", sans-serif;
+        }
 
-            }
-            .protected__content__btn:hover {
-                background-color: #1C6D36;
-            }
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
 
-        </style>
+        html,
+        body {
+            height: 100%;
+        }
 
-    </head>
+        body {
+            margin: 0;
+            padding: var(--space-4);
+            font-family: var(--font-base);
+            font-size: 0.875rem;
+            color: var(--text);
+            background: var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-    <body>
+        /* Card */
 
-        <div class="protected">
-            <div class="protected__alert" data-id="alert">You entered the wrong password</div>
-            <div class="protected__content">
-                <h1 class="protected__content__heading">You need a password to continue</h1>
-                <input class="protected__content__input" data-id="password" type="password" placeholder="password"/>
-                <button data-id="button" type="button" class="protected__content__btn">Continue</button>
-            </div>
+        .card {
+            width: 100%;
+            max-width: 25rem;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+        }
+
+        /* Alert */
+
+        .alert {
+            display: none;
+            padding: var(--space-3) var(--space-4);
+            background: var(--error-bg);
+            color: var(--error-text);
+            border-bottom: 1px solid var(--error-border);
+            font-size: 0.875rem;
+        }
+
+        /* Content */
+
+        .content {
+            padding: var(--space-8);
+            text-align: center;
+        }
+
+        .content svg {
+            display: block;
+            width: 2rem;
+            margin: 0 auto var(--space-4);
+            color: var(--primary);
+        }
+
+        .title {
+            margin: 0 0 var(--space-2);
+            font-size: 1.25rem;
+            font-weight: 600;
+            line-height: 1.4;
+            letter-spacing: -0.01em;
+        }
+
+        .description {
+            margin: 0 0 var(--space-6);
+            color: var(--muted);
+            font-size: 0.875rem;
+        }
+
+        /* Input */
+
+        .input {
+            width: 100%;
+            padding: 0.625rem 0.75rem;
+            font-size: 0.875rem;
+            font-family: inherit;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            background: var(--card);
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
+            margin-bottom: var(--space-4);
+        }
+
+        .input::placeholder {
+            color: var(--muted);
+        }
+
+        .input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: var(--ring);
+        }
+
+        /* Button */
+
+        .button {
+            width: 100%;
+            padding: 0.625rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            font-family: inherit;
+            border: none;
+            border-radius: var(--radius-md);
+            background: var(--primary);
+            color: hsl(210 40% 98%);
+            cursor: pointer;
+            transition: background-color 0.15s ease, transform 0.05s ease;
+        }
+
+        .button:hover {
+            background: var(--primary-hover);
+        }
+
+        .button:active {
+            transform: translateY(1px);
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="card">
+        <div class="alert" data-id="alert">
+            Incorrect password. Please try again.
         </div>
 
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/js-sha1/0.6.0/sha1.min.js"></script>
-        <script type="text/javascript">
-            "use strict"
-            var button = document.querySelectorAll('[data-id="button"]')
-            var password = document.querySelectorAll('[data-id="password"]')
+        <div class="content">
+            <svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 4.63601C5 3.76031 5.24219 3.1054 5.64323 2.67357C6.03934 2.24705 6.64582 1.9783 7.5014 1.9783C8.35745 1.9783 8.96306 2.24652 9.35823 2.67208C9.75838 3.10299 10 3.75708 10 4.63325V5.99999H5V4.63601ZM4 5.99999V4.63601C4 3.58148 4.29339 2.65754 4.91049 1.99307C5.53252 1.32329 6.42675 0.978302 7.5014 0.978302C8.57583 0.978302 9.46952 1.32233 10.091 1.99162C10.7076 2.65557 11 3.57896 11 4.63325V5.99999H12C12.5523 5.99999 13 6.44771 13 6.99999V13C13 13.5523 12.5523 14 12 14H3C2.44772 14 2 13.5523 2 13V6.99999C2 6.44771 2.44772 5.99999 3 5.99999H4ZM3 6.99999H12V13H3V6.99999Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+            <h1 class="title">Password Required</h1>
+            <p class="description">Enter your password to continue</p>
 
-            function login(secret) {
-                var hash = sha1(secret)
-                var url = hash + "/index.html"
-                var alert = document.querySelectorAll('[data-id="alert"]')
+            <input class="input" data-id="password" type="password" placeholder="Enter password" />
 
-                var request = new XMLHttpRequest()
-                request.open('GET', url, true)
+            <button class="button" data-id="button" type="button">
+                Continue
+            </button>
+        </div>
+    </div>
 
-                request.onload = function () {
-                    if (request.status >= 200 && request.status < 400) {
-                        window.location = url
-                    } else {
-                        parent.location.hash = hash
-                        alert[0].style.display = 'block'
-                        password[0].setAttribute('placeholder', 'Incorrect password')
-                        password[0].value = ''
+    <script type="module">
+        class PasswordGate {
+            constructor() {
+                this.elements = {
+                    alert: document.querySelector('[data-id="alert"]'),
+                    password: document.querySelector('[data-id="password"]'),
+                    button: document.querySelector('[data-id="button"]')
+                };
+
+                this.init();
+            }
+
+            init() {
+                this.elements.button.addEventListener('click', () => this.handleSubmit());
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        this.handleSubmit();
                     }
-                }
-                request.onerror = function () {
-                    parent.location.hash = hash
-                    alert[0].style.display = 'block'
-                    password[0].setAttribute('placeholder', 'Incorrect password')
-                    password[0].value = ''
-                }
-                request.send()
+                });
             }
 
-            button[0].addEventListener("click", function () {
-                login(password[0].value)
-            })
+            async handleSubmit() {
+                const password = this.elements.password.value;
+                await this.login(password);
+            }
 
-            document.onkeydown = function (e) {
-                e = e || window.event
-                if (e.keyCode == 13) {
-                    login(password[0].value)
+            async hashPassword(password) {
+                const encoder = new TextEncoder();
+                const data = encoder.encode(password);
+                const hashBuffer = await crypto.subtle.digest('SHA-1', data);
+                const hashArray = Array.from(new Uint8Array(hashBuffer));
+                return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            }
+
+            async login(password) {
+                const hash = await this.hashPassword(password);
+                const url = `${hash}/index.html`;
+
+                try {
+                    const response = await fetch(url);
+
+                    if (response.status >= 200 && response.status < 400) {
+                        window.location = url;
+                    } else {
+                        this.handleError(hash);
+                    }
+                } catch (error) {
+                    this.handleError(hash);
                 }
             }
-        </script>
-    </body>
+
+            handleError(hash) {
+                parent.location.hash = hash;
+                this.elements.alert.style.display = 'block';
+                this.elements.password.setAttribute('placeholder', 'Incorrect password');
+                this.elements.password.value = '';
+            }
+        }
+
+        new PasswordGate();
+    </script>
+</body>
+
 </html>
